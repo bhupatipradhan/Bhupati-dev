@@ -1,0 +1,379 @@
+{
+  "personal": {
+    "name": "Bhupati Pradhan",
+    "title": "Senior Java Developer & Full Stack Engineer",
+    "bio": "Passionate about building scalable applications and solving complex problems",
+    "email": "dev.bhupatipradhan@gmail.com",
+    "phone": "+1 (555) 123-4567",
+    "location": "Bhubaneswar, Odisha & Bengaluru, Karnataka, India",
+    "profileImage": "/my-photo.jpg"
+  },
+  "about": {
+    "title": "About Me",
+    "description": [
+      "I am a passionate Full Stack Java Developer with 5+ years of experience in enterprise software development. Specialized in building robust microservices and cloud-based solutions.",
+      "My expertise spans across backend technologies like Spring Boot, Hibernate, and AWS, combined with modern frontend frameworks. I have a proven track record of leading teams and delivering high-impact solutions.",
+      "Driven by a passion for innovation and continuous learning, I stay updated with the latest technologies in AI, cloud computing, and distributed systems."
+    ],
+    "highlights": [
+      {
+        "icon": "🎯",
+        "title": "5+ Years Experience",
+        "description": "In enterprise software development"
+      },
+      {
+        "icon": "🚀",
+        "title": "Innovation Focused",
+        "description": "Always exploring cutting-edge technologies"
+      },
+      {
+        "icon": "🏢",
+        "title": "Enterprise Solutions",
+        "description": "Built systems for large-scale applications"
+      }
+    ]
+  },
+  "experience": [
+    {
+      "title": "Consultant",
+      "company": "BIG 4",
+      "location": "India",
+      "period": "Sept 2024 - Present",
+      "duration": "1.3+ Years",
+      "description": [
+        "Working as a consultant with 1.3+ years of experience in software development and cloud engineering",
+        "Technical expertise includes Java, Python, and various DevOps tools",
+        "Worked on AWS-based solutions and automation initiatives",
+        "Contributing to Generative AI projects, focusing on practical enterprise use cases",
+        "Extensive experience developing Java application projects from start to finish",
+        "Proficient in developing object-oriented business applications with Java, JDBC, Servlet, JSP, Hibernate with JPA, RESTful Services, MicroServices, Spring, and Spring Boot"
+      ],
+      "icon": "🚀",
+      "color": "from-blue-500 to-cyan-500",
+      "gradient": "from-blue-500/20 via-cyan-500/20 to-blue-500/20"
+    },
+    {
+      "title": "Team Lead & Senior Java Developer",
+      "company": "THOUGHTi India Pvt. Ltd.",
+      "location": "India",
+      "period": "Dec 2020 - May 2024",
+      "duration": "3.5 Years",
+      "description": [
+        "Embarked professional journey as a Java Developer and evolved into Team Lead role",
+        "Consistently appreciated by team members for sense of responsibility and innovative problem-solving",
+        "Contributed ideas that address challenges effectively and enhance overall project efficiency",
+        "Met client goals ahead of deadlines by performing testing and validation of developed logic",
+        "Expertise in third-party library integration, application design, and support",
+        "Adopted Agile & Scrum techniques to carry out application development",
+        "Managed Software Development Lifecycle (SDLC) from requirement analysis to documentation",
+        "Strict adherence to coding standards and design patterns for maintainable and functional applications"
+      ],
+      "icon": "👨‍💼",
+      "color": "from-purple-500 to-pink-500",
+      "gradient": "from-purple-500/20 via-pink-500/20 to-purple-500/20"
+    },
+    {
+      "title": "Trainee",
+      "company": "Spectovision Technologies Pvt. Ltd.",
+      "location": "India",
+      "period": "Aug 2019 - Apr 2020",
+      "duration": "9 Months",
+      "description": [
+        "Learned technical skills including programming languages and software development lifecycle phases",
+        "Developed problem-solving abilities, communication, and time management skills",
+        "Understood importance of documentation, testing, and continuous learning",
+        "Embraced professionalism for effective collaboration and career growth"
+      ],
+      "icon": "🎓",
+      "color": "from-green-500 to-teal-500",
+      "gradient": "from-green-500/20 via-teal-500/20 to-green-500/20"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Intellicentrics",
+      "description": "Comprehensive healthcare solution using FHIR R4 standard resources. Developed functionalities including appointment scheduling, insurance, credential management, practitioner management, and patient management. Implemented microservices architecture.",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "Hibernate",
+        "Node.js",
+        "AWS",
+        "Kafka",
+        "Docker",
+        "Jenkins",
+        "Python",
+        "WSO2 API Gateway",
+        "FHIR",
+        "SonarQube"
+      ],
+      "owner": "THOUGHTi India Pvt. Ltd.",
+      "image": "🏥",
+      "role": "Senior Developer",
+      "color": "from-blue-500 to-cyan-500",
+      "gradient": "from-blue-500/20 via-cyan-500/20 to-blue-500/20",
+      "featured": true,
+      "category": "Healthcare"
+    },
+    {
+      "title": "Neurex",
+      "description": "AI-based product harnessing advanced algorithms and NLP to extract valuable information from lengthy, unstructured patient notes. Efficiently identifies the most suitable SNOMED CT code, saving significant clinician time.",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "Hibernate",
+        "React",
+        "Node.js",
+        "HL7",
+        "RESTful Services"
+      ],
+      "owner": "THOUGHTi India Pvt. Ltd.",
+      "image": "🤖",
+      "role": "Senior Developer & Team Lead",
+      "color": "from-purple-500 to-pink-500",
+      "gradient": "from-purple-500/20 via-pink-500/20 to-purple-500/20",
+      "featured": true,
+      "category": "AI/Healthcare"
+    },
+    {
+      "title": "Smart On FHIR",
+      "description": "Application utilizing g10 Standardized API to achieve ONC Certification. Includes protocols for authentication and authorization. Utilizes HAPI-FHIR with unique codes as the project cornerstone.",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "Hibernate",
+        "React",
+        "Node.js",
+        "HAPI-FHIR",
+        "OAuth2",
+        "RESTful Services"
+      ],
+      "owner": "THOUGHTi India Pvt. Ltd.",
+      "image": "💡",
+      "role": "Senior Developer & Team Lead",
+      "color": "from-green-500 to-teal-500",
+      "gradient": "from-green-500/20 via-teal-500/20 to-green-500/20",
+      "featured": false,
+      "category": "Healthcare"
+    },
+    {
+      "title": "iMTD",
+      "description": "Organization can look up, verify, and translate medical terms with iMTD. A container for any structured medical terminology database using Unified Medical Language System (UMLS).",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "Hibernate",
+        "PostgreSQL",
+        "Apache Ctakes",
+        "UMLS",
+        "RESTful Services"
+      ],
+      "owner": "THOUGHTi India Pvt. Ltd.",
+      "image": "📚",
+      "role": "Developer",
+      "color": "from-orange-500 to-red-500",
+      "gradient": "from-orange-500/20 via-red-500/20 to-orange-500/20",
+      "featured": false,
+      "category": "Healthcare"
+    },
+    {
+      "title": "Epic-Mapping",
+      "description": "Mapping to POJO class to retrieve EPIC EMR (Electronic Medical Report) and store in Mongo database. Trigger monitors database changes and generates EPIC data to send to EPIC server.",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "Hibernate",
+        "Apache Camel",
+        "MongoDB"
+      ],
+      "owner": "THOUGHTi India Pvt. Ltd.",
+      "image": "🗺️",
+      "role": "Developer",
+      "color": "from-yellow-500 to-orange-500",
+      "gradient": "from-yellow-500/20 via-orange-500/20 to-yellow-500/20",
+      "featured": false,
+      "category": "Healthcare"
+    },
+    {
+      "title": "Tenant Management",
+      "description": "Clinics use custom authentication logic for login, and multiple FHIR R4 resources are used to store data. Used to register and store multiple clinics and their data under a single DB.",
+      "technologies": [
+        "Java",
+        "Spring Boot",
+        "Hibernate",
+        "JSP",
+        "RESTful Services",
+        "MySQL",
+        "Web Services"
+      ],
+      "owner": "THOUGHTi India Pvt. Ltd.",
+      "image": "🏢",
+      "role": "Developer",
+      "color": "from-indigo-500 to-purple-500",
+      "gradient": "from-indigo-500/20 via-purple-500/20 to-indigo-500/20",
+      "featured": false,
+      "category": "Enterprise"
+    },
+    {
+      "title": "E-health Exchange",
+      "description": "Exchange of health information application supporting both national and local exchanges. Uses secure network standards to ensure health information exchanges are compatible.",
+      "technologies": [
+        "Java",
+        "Spring",
+        "MySQL",
+        "Servlet",
+        "JDBC"
+      ],
+      "owner": "THOUGHTi India Pvt. Ltd.",
+      "image": "🔄",
+      "role": "Developer",
+      "color": "from-pink-500 to-rose-500",
+      "gradient": "from-pink-500/20 via-rose-500/20 to-pink-500/20",
+      "featured": false,
+      "category": "Healthcare"
+    }
+  ],
+  "skills": {
+    "programmingLanguages": [
+      { "name": "Java", "proficiency": 95 },
+      { "name": "Python", "proficiency": 85 },
+      { "name": "JavaScript", "proficiency": 80 }
+    ],
+    "frameworks": [
+      { "name": "Spring Boot", "proficiency": 95 },
+      { "name": "Spring MVC", "proficiency": 90 },
+      { "name": "Hibernate", "proficiency": 90 }
+    ],
+    "databases": [
+      { "name": "MySQL", "proficiency": 95 },
+      { "name": "PostgreSQL", "proficiency": 85 },
+      { "name": "MongoDB", "proficiency": 85 },
+      { "name": "DynamoDB", "proficiency": 80 },
+      { "name": "Neo4j", "proficiency": 80 }
+    ],
+    "vectorDatabases": [
+      { "name": "Weaviate", "proficiency": 85 },
+      { "name": "Chroma", "proficiency": 85 },
+      { "name": "Pinecone", "proficiency": 80 },
+      { "name": "FAISS", "proficiency": 80 }
+    ],
+    "devOps": [
+      { "name": "Docker", "proficiency": 85 },
+      { "name": "Kubernetes", "proficiency": 80 },
+      { "name": "Jenkins", "proficiency": 85 },
+      { "name": "Kafka", "proficiency": 80 },
+      { "name": "Grafana", "proficiency": 80 },
+      { "name": "Prometheus", "proficiency": 80 },
+      { "name": "Git", "proficiency": 95 },
+      { "name": "Linux", "proficiency": 85 }
+    ],
+    "cloudPlatforms": [
+      { "name": "AWS", "proficiency": 85 },
+      { "name": "Google Cloud", "proficiency": 80 },
+      { "name": "Azure", "proficiency": 80 }
+    ],
+    "ai": [
+      { "name": "Python AI/ML", "proficiency": 85 },
+      { "name": "OpenAI", "proficiency": 85 },
+      { "name": "Google Gemini", "proficiency": 80 },
+      { "name": "LLaMA", "proficiency": 80 },
+      { "name": "Claude", "proficiency": 80 }
+    ],
+    "additionalSkills": [
+      "Kubernetes",
+      "Docker Compose",
+      "Grafana",
+      "Prometheus",
+      "AWS Lambda",
+      "AWS S3",
+      "AWS EC2",
+      "Google Cloud Storage",
+      "Azure VMs",
+      "Azure App Service",
+      "Neo4j Graph Database",
+      "Weaviate Vector DB",
+      "Chroma",
+      "Pinecone",
+      "FAISS",
+      "Vector Embeddings",
+      "OpenAI API",
+      "Gemini API",
+      "LLaMA Models",
+      "Claude API",
+      "Prompt Engineering",
+      "RAG",
+      "Microservices",
+      "REST API",
+      "GraphQL",
+      "gRPC",
+      "Message Queues",
+      "Redis",
+      "Elasticsearch",
+      "Solr",
+      "API Gateway",
+      "Load Balancing",
+      "CI/CD",
+      "Test-Driven Development",
+      "Agile",
+      "Scrum",
+      "Design Patterns"
+    ]
+  },
+  "contact": {
+    "contactInfo": [
+      {
+        "icon": "email",
+        "title": "Email",
+        "content": "dev.bhupatipradhan@gmail.com",
+        "link": "mailto:dev.bhupatipradhan@gmail.com",
+        "color": "from-blue-500 to-cyan-500"
+      },
+      {
+        "icon": "phone",
+        "title": "Phone",
+        "content": "+1 (555) 123-4567",
+        "link": "tel:+15551234567",
+        "color": "from-purple-500 to-pink-500"
+      },
+      {
+        "icon": "location",
+        "title": "Location",
+        "content": "Bhubaneswar, Odisha & Bengaluru, Karnataka, India",
+        "link": "#",
+        "color": "from-green-500 to-teal-500"
+      }
+    ],
+    "socialLinks": [
+      {
+        "icon": "linkedin",
+        "url": "https://www.linkedin.com/in/bhupati-pradhan",
+        "label": "LinkedIn",
+        "color": "from-blue-600 to-blue-800"
+      },
+      {
+        "icon": "github",
+        "url": "https://github.com/bhupatipradhan",
+        "label": "GitHub",
+        "color": "from-gray-700 to-gray-900"
+      },
+      {
+        "icon": "x",
+        "url": "https://x.com/bhupati_bm",
+        "label": "X (Twitter)",
+        "color": "from-gray-600 to-black"
+      },
+      {
+        "icon": "instagram",
+        "url": "https://instagram.com",
+        "label": "Instagram",
+        "color": "from-pink-500 to-rose-500"
+      }
+    ],
+    "emailConfig": {
+      "serviceId": "YOUR_SERVICE_ID_HERE",
+      "templateId": "YOUR_TEMPLATE_ID_HERE",
+      "publicKey": "YOUR_PUBLIC_KEY_HERE",
+      "recipientEmail": "YOUR_EMAIL_HERE"
+    }
+  }
+}

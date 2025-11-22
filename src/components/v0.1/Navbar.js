@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import VersionSwitcher from '../VersionSwitcher';
 
 const Navbar = ({ isScrolled }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,7 +40,7 @@ const Navbar = ({ isScrolled }) => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-6">
             <div className="ml-10 flex items-baseline space-x-8">
               {navLinks.map((link) => (
                 <a
@@ -55,10 +56,12 @@ const Navbar = ({ isScrolled }) => {
                 </a>
               ))}
             </div>
+            <VersionSwitcher isScrolled={isScrolled} />
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-4">
+            <VersionSwitcher isScrolled={isScrolled} />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`p-2 rounded-md transition-colors ${

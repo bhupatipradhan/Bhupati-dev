@@ -1,22 +1,22 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 const VersionContext = createContext();
 
 export const useVersion = () => {
   const context = useContext(VersionContext);
   if (!context) {
-    throw new Error('useVersion must be used within a VersionProvider');
+    throw new Error("useVersion must be used within a VersionProvider");
   }
   return context;
 };
 
 export const VersionProvider = ({ children }) => {
-  const [version, setVersion] = useState('v0.1');
+  const [version, setVersion] = useState("v0.2");
 
   const switchVersion = (newVersion) => {
     setVersion(newVersion);
     // Scroll to top when switching versions
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -25,4 +25,3 @@ export const VersionProvider = ({ children }) => {
     </VersionContext.Provider>
   );
 };
-

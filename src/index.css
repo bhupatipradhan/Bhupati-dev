@@ -8,13 +8,13 @@
   }
   
   body {
-    @apply bg-gray-50 text-gray-900;
+    @apply bg-gray-950 text-gray-100;
   }
 }
 
 @layer components {
   .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12;
   }
   
   .section-title {
@@ -24,6 +24,65 @@
   .section-subtitle {
     @apply text-xl text-gray-600 mb-12 text-center max-w-2xl mx-auto;
   }
+}
+
+/* Custom cyclic animations */
+@keyframes logoGlow {
+  0% {
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4), 0 0 16px rgba(147, 51, 234, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(59, 130, 246, 0.8), 0 0 24px rgba(147, 51, 234, 0.4);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4), 0 0 16px rgba(147, 51, 234, 0.2);
+    transform: scale(1);
+  }
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes smoothRotate {
+  0% {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(10deg);
+  }
+  100% {
+    transform: rotateY(0deg);
+  }
+}
+
+.animate-logo-glow {
+  animation: logoGlow 3s ease-in-out infinite;
+}
+
+.animate-text-shimmer {
+  animation: textShimmer 4s linear infinite;
+  background: linear-gradient(90deg, 
+    rgb(96, 165, 250), 
+    rgb(168, 85, 247), 
+    rgb(236, 72, 153),
+    rgb(96, 165, 250));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.animate-smooth-rotate {
+  animation: smoothRotate 4s ease-in-out infinite;
+  perspective: 1000px;
 }
 
 

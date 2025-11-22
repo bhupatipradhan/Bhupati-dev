@@ -1,39 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { FaBars, FaTimes } from 'react-icons/fa';
-import VersionSwitcher from '../VersionSwitcher';
-import { useVersion } from '../../context/VersionContext';
+import React, { useState, useEffect } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = ({ isScrolled }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('home');
-  const { version } = useVersion();
+  const [activeLink, setActiveLink] = useState("home");
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
-    { name: 'About', href: '#about', id: 'about' },
-    { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'Experience', href: '#experience', id: 'experience' },
-    { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
+    { name: "Home", href: "#home", id: "home" },
+    { name: "About", href: "#about", id: "about" },
+    { name: "Skills", href: "#skills", id: "skills" },
+    { name: "Experience", href: "#experience", id: "experience" },
+    { name: "Projects", href: "#projects", id: "projects" },
+    { name: "Games", href: "#games", id: "games" },
+    { name: "Contact", href: "#contact", id: "contact" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navLinks.map(link => document.querySelector(link.href));
+      const sections = navLinks.map((link) =>
+        document.querySelector(link.href)
+      );
       const scrollPosition = window.scrollY + 100;
 
       sections.forEach((section, index) => {
         if (section) {
           const { offsetTop, offsetHeight } = section;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
             setActiveLink(navLinks[index].id);
           }
         }
       });
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLinkClick = (id) => {
@@ -45,21 +48,28 @@ const Navbar = ({ isScrolled }) => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-md shadow-lg'
-          : 'bg-transparent'
+          ? "bg-gray-950/90 backdrop-blur-xl shadow-2xl shadow-primary-500/10 border-b border-gray-700/30"
+          : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 flex items-center gap-3">
+            <img
+              src="/ChatGPT Image Nov 22, 2025, 12_39_27 AM.png"
+              alt="Bhupati"
+              className="w-10 h-10 rounded-full object-cover animate-logo-glow"
+            />
             <a
               href="#home"
-              onClick={() => handleLinkClick('home')}
+              onClick={() => handleLinkClick("home")}
               className={`text-2xl font-bold transition-all duration-300 hover:scale-110 ${
-                isScrolled ? 'text-primary-600' : 'text-white'
+                isScrolled ? "text-primary-400" : "text-white"
               }`}
             >
-              Portfolio
+              <span className="bg-gradient-to-r from-primary-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Bhupati
+              </span>
             </a>
           </div>
 
@@ -71,35 +81,36 @@ const Navbar = ({ isScrolled }) => {
                   key={link.name}
                   href={link.href}
                   onClick={() => handleLinkClick(link.id)}
-                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 hover:text-primary-600 ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 group ${
                     isScrolled
                       ? activeLink === link.id
-                        ? 'text-primary-600'
-                        : 'text-gray-700'
+                        ? "text-primary-400"
+                        : "text-gray-300 hover:text-primary-400"
                       : activeLink === link.id
-                      ? 'text-white'
-                      : 'text-white/80'
+                      ? "text-white"
+                      : "text-white/70 hover:text-white"
                   }`}
                 >
                   {link.name}
                   {activeLink === link.id && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary-600 animate-expand"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-primary-400 to-purple-400 animate-expand rounded-full"></span>
+                  )}
+                  {activeLink !== link.id && (
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-primary-400 to-purple-400 group-hover:w-full transition-all duration-300 rounded-full"></span>
                   )}
                 </a>
               ))}
             </div>
-            <VersionSwitcher isScrolled={isScrolled} />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-4">
-            <VersionSwitcher isScrolled={isScrolled} />
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`p-2 rounded-md transition-all duration-300 ${
                 isScrolled
-                  ? 'text-gray-700 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/10'
+                  ? "text-gray-300 hover:bg-gray-800"
+                  : "text-white hover:bg-white/10"
               }`}
               aria-label="Toggle menu"
             >
@@ -115,8 +126,8 @@ const Navbar = ({ isScrolled }) => {
 
       {/* Mobile Navigation */}
       <div
-        className={`md:hidden bg-white/95 backdrop-blur-md shadow-lg transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        className={`md:hidden bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-800/50 transition-all duration-300 overflow-hidden ${
+          isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
@@ -127,8 +138,8 @@ const Navbar = ({ isScrolled }) => {
               onClick={() => handleLinkClick(link.id)}
               className={`block px-3 py-2 text-base font-medium rounded-md transition-all duration-300 ${
                 activeLink === link.id
-                  ? 'bg-primary-600 text-white'
-                  : 'text-gray-700 hover:bg-primary-50 hover:text-primary-600'
+                  ? "bg-primary-600 text-white"
+                  : "text-gray-300 hover:bg-gray-800 hover:text-primary-400"
               }`}
             >
               {link.name}
@@ -158,4 +169,3 @@ const Navbar = ({ isScrolled }) => {
 };
 
 export default Navbar;
-
