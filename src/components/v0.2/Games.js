@@ -16,13 +16,14 @@ const Games = () => {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -239,7 +240,7 @@ const SnakeGame = () => {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [changeDirection]);
+  }, [changeDirection, gameStarted]);
 
   // Handle touch events for swipe gestures
   useEffect(() => {
@@ -495,7 +496,7 @@ const Game2048 = () => {
   const [gameOver, setGameOver] = useState(false);
   const [won, setWon] = useState(false);
 
-  const move = (direction) => {
+  const move = useCallback((direction) => {
     if (gameOver || won) return;
 
     let newBoard = JSON.parse(JSON.stringify(board));
@@ -548,7 +549,7 @@ const Game2048 = () => {
     if (isGameOver(boardWithTile)) {
       setGameOver(true);
     }
-  };
+  }, [board, gameOver, won]);
 
   const compressRow = (row, reverse) => {
     if (reverse) row = row.reverse();
@@ -638,7 +639,7 @@ const Game2048 = () => {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [gameOver, won, board]);
+  }, [gameOver, won, board, move]);
 
   return (
     <div className="max-w-2xl mx-auto">

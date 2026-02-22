@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
+const navLinks = [
+  { name: "Home", href: "#home", id: "home" },
+  { name: "About", href: "#about", id: "about" },
+  { name: "Skills", href: "#skills", id: "skills" },
+  { name: "Experience", href: "#experience", id: "experience" },
+  { name: "Projects", href: "#projects", id: "projects" },
+  { name: "Games", href: "#games", id: "games" },
+  { name: "Contact", href: "#contact", id: "contact" },
+];
+
 const Navbar = ({ isScrolled }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("home");
-
-  const navLinks = [
-    { name: "Home", href: "#home", id: "home" },
-    { name: "About", href: "#about", id: "about" },
-    { name: "Skills", href: "#skills", id: "skills" },
-    { name: "Experience", href: "#experience", id: "experience" },
-    { name: "Projects", href: "#projects", id: "projects" },
-    { name: "Games", href: "#games", id: "games" },
-    { name: "Contact", href: "#contact", id: "contact" },
-  ];
 
   useEffect(() => {
     const handleScroll = () => {

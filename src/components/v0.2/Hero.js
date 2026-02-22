@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import {
   FaGithub,
   FaLinkedin,
-  FaEnvelope,
   FaDownload,
   FaArrowDown,
   FaXTwitter,

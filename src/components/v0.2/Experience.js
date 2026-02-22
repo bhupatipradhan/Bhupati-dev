@@ -5,7 +5,7 @@ import portfolioData from "../../data/portfolioData.json";
 const Experience = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [expandedIndex, setExpandedIndex] = useState(0);
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [, setHoveredIndex] = useState(null);
   const sectionRef = useRef(null);
 
   useEffect(() => {

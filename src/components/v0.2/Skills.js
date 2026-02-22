@@ -27,11 +27,8 @@ import {
   SiNeo4J,
   SiOpenai,
   SiReact,
-  SiRedux,
   SiNodedotjs,
-  SiGraphql,
 } from "react-icons/si";
-import portfolioData from "../../data/portfolioData.json";
 
 const Skills = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -49,13 +46,14 @@ const Skills = () => {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);

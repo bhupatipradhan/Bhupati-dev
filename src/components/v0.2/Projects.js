@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  FaGithub,
   FaExternalLinkAlt,
   FaJava,
   FaDatabase,
@@ -8,7 +7,6 @@ import {
   FaCode,
 } from "react-icons/fa";
 import { SiSpring, SiDocker } from "react-icons/si";
-import portfolioData from "../../data/portfolioData.json";
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -26,13 +24,14 @@ const Projects = () => {
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
