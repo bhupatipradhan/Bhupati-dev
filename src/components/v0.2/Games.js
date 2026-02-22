@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { FaArrowLeft, FaRedo } from "react-icons/fa";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { FaArrowLeft, FaRedo, FaArrowUp, FaArrowDown, FaArrowRight } from "react-icons/fa";
 
 const Games = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -160,6 +160,39 @@ const SnakeGame = () => {
 
   const GRID_SIZE = 20;
   const TILE_COUNT = 20;
+  const touchStartRef = useRef({ x: 0, y: 0 });
+  const directionRef = useRef(direction);
+  const gameStartedRef = useRef(gameStarted);
+
+  // Update refs when state changes
+  useEffect(() => {
+    directionRef.current = direction;
+  }, [direction]);
+
+  useEffect(() => {
+    gameStartedRef.current = gameStarted;
+  }, [gameStarted]);
+
+  // Helper function to change direction
+  const changeDirection = useCallback((newDir) => {
+    if (!gameStartedRef.current) {
+      setGameStarted(true);
+    }
+    
+    const currentDir = directionRef.current;
+    
+    // Prevent reversing into itself
+    if (newDir[0] === -currentDir[0] && newDir[1] === -currentDir[1]) {
+      return;
+    }
+    
+    // Only change if moving perpendicular
+    if (newDir[0] !== 0 && currentDir[0] === 0) {
+      setNextDirection(newDir);
+    } else if (newDir[1] !== 0 && currentDir[1] === 0) {
+      setNextDirection(newDir);
+    }
+  }, []);
 
   // Handle keyboard input
   useEffect(() => {
@@ -182,22 +215,22 @@ const SnakeGame = () => {
         case "ArrowUp":
         case "w":
         case "W":
-          if (direction[1] === 0) setNextDirection([0, -1]);
+          changeDirection([0, -1]);
           break;
         case "ArrowDown":
         case "s":
         case "S":
-          if (direction[1] === 0) setNextDirection([0, 1]);
+          changeDirection([0, 1]);
           break;
         case "ArrowLeft":
         case "a":
         case "A":
-          if (direction[0] === 0) setNextDirection([-1, 0]);
+          changeDirection([-1, 0]);
           break;
         case "ArrowRight":
         case "d":
         case "D":
-          if (direction[0] === 0) setNextDirection([1, 0]);
+          changeDirection([1, 0]);
           break;
         default:
           break;
@@ -206,7 +239,55 @@ const SnakeGame = () => {
 
     window.addEventListener("keydown", handleKeyPress);
     return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [direction, gameStarted]);
+  }, [changeDirection]);
+
+  // Handle touch events for swipe gestures
+  useEffect(() => {
+    const handleTouchStart = (e) => {
+      const touch = e.touches[0];
+      touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+    };
+
+    const handleTouchEnd = (e) => {
+      if (!touchStartRef.current) return;
+      
+      const touch = e.changedTouches[0];
+      const deltaX = touch.clientX - touchStartRef.current.x;
+      const deltaY = touch.clientY - touchStartRef.current.y;
+      const minSwipeDistance = 30; // Minimum distance for a swipe
+
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        // Horizontal swipe
+        if (Math.abs(deltaX) > minSwipeDistance) {
+          if (deltaX > 0) {
+            changeDirection([1, 0]); // Right
+          } else {
+            changeDirection([-1, 0]); // Left
+          }
+        }
+      } else {
+        // Vertical swipe
+        if (Math.abs(deltaY) > minSwipeDistance) {
+          if (deltaY > 0) {
+            changeDirection([0, 1]); // Down
+          } else {
+            changeDirection([0, -1]); // Up
+          }
+        }
+      }
+    };
+
+    const canvas = canvasRef.current;
+    if (canvas) {
+      canvas.addEventListener("touchstart", handleTouchStart, { passive: true });
+      canvas.addEventListener("touchend", handleTouchEnd, { passive: true });
+      
+      return () => {
+        canvas.removeEventListener("touchstart", handleTouchStart);
+        canvas.removeEventListener("touchend", handleTouchEnd);
+      };
+    }
+  }, [changeDirection]);
 
   // Game loop
   useEffect(() => {
@@ -325,9 +406,43 @@ const SnakeGame = () => {
               {gameOver ? (
                 <span className="text-red-500 font-bold">Game Over! 💀</span>
               ) : (
-                "Use Arrow Keys or WASD to move"
+                "Use Arrow Keys, WASD, swipe, or buttons to move"
               )}
             </p>
+
+            {/* Touch Controls - Directional Buttons */}
+            <div className="flex flex-col items-center gap-2 md:hidden">
+              <button
+                onClick={() => changeDirection([0, -1])}
+                className="w-16 h-16 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all transform active:scale-95 shadow-lg"
+                aria-label="Move Up"
+              >
+                <FaArrowUp size={24} />
+              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => changeDirection([-1, 0])}
+                  className="w-16 h-16 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all transform active:scale-95 shadow-lg"
+                  aria-label="Move Left"
+                >
+                  <FaArrowLeft size={24} />
+                </button>
+                <button
+                  onClick={() => changeDirection([1, 0])}
+                  className="w-16 h-16 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all transform active:scale-95 shadow-lg"
+                  aria-label="Move Right"
+                >
+                  <FaArrowRight size={24} />
+                </button>
+              </div>
+              <button
+                onClick={() => changeDirection([0, 1])}
+                className="w-16 h-16 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all transform active:scale-95 shadow-lg"
+                aria-label="Move Down"
+              >
+                <FaArrowDown size={24} />
+              </button>
+            </div>
 
             <button
               onClick={() => {

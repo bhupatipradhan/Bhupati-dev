@@ -132,7 +132,7 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/30 backdrop-blur-sm">
               <HiSparkles className="text-primary-400 animate-pulse" />
               <span className="text-sm font-medium text-primary-300">
-                Senior Java Developer & Consultant
+                Senior Java Developer, AI/ML Engineer & Consultant
               </span>
             </div>
 
@@ -157,7 +157,9 @@ const Hero = () => {
                   {" "}
                   Spring Boot
                 </span>
-                , and
+                ,{" "}
+                <span className="text-yellow-400 font-semibold">Python</span>,{" "}
+                <span className="text-emerald-400 font-semibold">AI/ML</span>, and
                 <span className="text-pink-400 font-semibold"> AWS Cloud</span>
               </p>
             </div>
@@ -165,8 +167,7 @@ const Hero = () => {
             {/* Description */}
             <p className="text-lg text-gray-400 leading-relaxed max-w-xl">
               Experienced Team Lead specializing in microservices architecture,
-              cloud engineering, and Generative AI solutions for enterprise use
-              cases.
+              cloud engineering, and Generative AI solutions using Claude LLM, OpenAI, and other advanced AI models for enterprise use cases.
             </p>
 
             {/* CTA Buttons */}
