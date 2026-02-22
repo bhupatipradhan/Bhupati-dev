@@ -183,8 +183,8 @@ const Hero = () => {
               </a>
 
               <a
-                href="/BhupatiPradhanResume.docx"
-                download
+                href="/BhupatiPradhanResume.pdf"
+                download="BhupatiPradhanResume.pdf"
                 className="group relative px-8 py-4 bg-transparent border-2 border-gray-700 rounded-xl font-bold text-white hover:border-primary-500 transition-all duration-300 transform hover:scale-105"
               >
                 <span className="relative z-10 flex items-center gap-2">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { FaArrowLeft, FaRedo, FaArrowUp, FaArrowDown, FaArrowRight } from "react-icons/fa";
+import { FaArrowLeft, FaRedo } from "react-icons/fa";
 
 const Games = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -44,6 +44,12 @@ const Games = () => {
       emoji: "🎮",
     },
     {
+      id: "rps",
+      name: "✊ Rock Paper Scissors",
+      description: "Classic hand game – beat the computer!",
+      emoji: "✊",
+    },
+    {
       id: "tictactoe",
       name: "❌ Tic Tac Toe",
       description: "Play against the AI! X vs O",
@@ -67,6 +73,7 @@ const Games = () => {
 
           {selectedGame === "snake" && <SnakeGame />}
           {selectedGame === "2048" && <Game2048 />}
+          {selectedGame === "rps" && <RockPaperScissorsGame />}
           {selectedGame === "tictactoe" && <TicTacToeGame />}
         </div>
       </section>
@@ -148,6 +155,10 @@ const Games = () => {
 };
 
 // ==================== SNAKE GAME ====================
+const JOYSTICK_RADIUS = 52;
+const JOYSTICK_KNOB_RADIUS = 22;
+const JOYSTICK_DEADZONE = 18;
+
 const SnakeGame = () => {
   const canvasRef = useRef(null);
   const [snake, setSnake] = useState([[10, 10]]);
@@ -157,7 +168,9 @@ const SnakeGame = () => {
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [joystickOffset, setJoystickOffset] = useState({ x: 0, y: 0 });
   const gameLoopRef = useRef(null);
+  const joystickRef = useRef(null);
 
   const GRID_SIZE = 20;
   const TILE_COUNT = 20;
@@ -193,6 +206,39 @@ const SnakeGame = () => {
     } else if (newDir[1] !== 0 && currentDir[1] === 0) {
       setNextDirection(newDir);
     }
+  }, []);
+
+  // Joystick: map client position to direction and knob offset
+  const handleJoystickMove = useCallback((clientX, clientY) => {
+    const el = joystickRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    let dx = clientX - centerX;
+    let dy = clientY - centerY;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist > JOYSTICK_RADIUS) {
+      const scale = JOYSTICK_RADIUS / dist;
+      dx *= scale;
+      dy *= scale;
+    }
+    const normX = dist > 0 ? dx / JOYSTICK_RADIUS : 0;
+    const normY = dist > 0 ? dy / JOYSTICK_RADIUS : 0;
+    setJoystickOffset({ x: normX, y: normY });
+    if (dist > JOYSTICK_DEADZONE) {
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+      if (absY > absX) {
+        changeDirection([0, dy < 0 ? -1 : 1]);
+      } else {
+        changeDirection([dx > 0 ? 1 : -1, 0]);
+      }
+    }
+  }, [changeDirection]);
+
+  const handleJoystickEnd = useCallback(() => {
+    setJoystickOffset({ x: 0, y: 0 });
   }, []);
 
   // Handle keyboard input
@@ -407,42 +453,62 @@ const SnakeGame = () => {
               {gameOver ? (
                 <span className="text-red-500 font-bold">Game Over! 💀</span>
               ) : (
-                "Use Arrow Keys, WASD, swipe, or buttons to move"
+                "Use Arrow Keys, WASD, swipe, or joystick to move"
               )}
             </p>
 
-            {/* Touch Controls - Directional Buttons */}
-            <div className="flex flex-col items-center gap-2 md:hidden">
-              <button
-                onClick={() => changeDirection([0, -1])}
-                className="w-16 h-16 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all transform active:scale-95 shadow-lg"
-                aria-label="Move Up"
+            {/* Touch Controls - Virtual Joystick */}
+            <div className="flex justify-center md:hidden">
+              <div
+                ref={joystickRef}
+                className="relative select-none touch-none flex items-center justify-center rounded-full bg-gray-800/80 border-2 border-primary-500/50 shadow-xl"
+                style={{
+                  width: JOYSTICK_RADIUS * 2,
+                  height: JOYSTICK_RADIUS * 2,
+                }}
+                onTouchStart={(e) => {
+                  e.preventDefault();
+                  const t = e.touches[0];
+                  handleJoystickMove(t.clientX, t.clientY);
+                }}
+                onTouchMove={(e) => {
+                  e.preventDefault();
+                  const t = e.touches[0];
+                  handleJoystickMove(t.clientX, t.clientY);
+                }}
+                onTouchEnd={(e) => {
+                  e.preventDefault();
+                  handleJoystickEnd();
+                }}
+                onTouchCancel={(e) => {
+                  e.preventDefault();
+                  handleJoystickEnd();
+                }}
+                onMouseDown={(e) => {
+                  e.preventDefault();
+                  handleJoystickMove(e.clientX, e.clientY);
+                  const onMouseMove = (ev) => handleJoystickMove(ev.clientX, ev.clientY);
+                  const onMouseUp = () => {
+                    handleJoystickEnd();
+                    document.removeEventListener("mousemove", onMouseMove);
+                    document.removeEventListener("mouseup", onMouseUp);
+                  };
+                  document.addEventListener("mousemove", onMouseMove);
+                  document.addEventListener("mouseup", onMouseUp);
+                }}
+                aria-label="Direction joystick for snake game"
               >
-                <FaArrowUp size={24} />
-              </button>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => changeDirection([-1, 0])}
-                  className="w-16 h-16 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all transform active:scale-95 shadow-lg"
-                  aria-label="Move Left"
-                >
-                  <FaArrowLeft size={24} />
-                </button>
-                <button
-                  onClick={() => changeDirection([1, 0])}
-                  className="w-16 h-16 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all transform active:scale-95 shadow-lg"
-                  aria-label="Move Right"
-                >
-                  <FaArrowRight size={24} />
-                </button>
+                <div
+                  className="absolute rounded-full bg-primary-500 shadow-lg pointer-events-none transition-transform duration-75"
+                  style={{
+                    width: JOYSTICK_KNOB_RADIUS * 2,
+                    height: JOYSTICK_KNOB_RADIUS * 2,
+                    left: "50%",
+                    top: "50%",
+                    transform: `translate(calc(-50% + ${joystickOffset.x * (JOYSTICK_RADIUS - JOYSTICK_KNOB_RADIUS)}px), calc(-50% + ${joystickOffset.y * (JOYSTICK_RADIUS - JOYSTICK_KNOB_RADIUS)}px))`,
+                  }}
+                />
               </div>
-              <button
-                onClick={() => changeDirection([0, 1])}
-                className="w-16 h-16 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl flex items-center justify-center transition-all transform active:scale-95 shadow-lg"
-                aria-label="Move Down"
-              >
-                <FaArrowDown size={24} />
-              </button>
             </div>
 
             <button
@@ -700,6 +766,193 @@ const Game2048 = () => {
               <FaRedo /> New Game
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ==================== ROCK PAPER SCISSORS GAME ====================
+const CHOICES = [
+  { id: "rock", label: "Rock", emoji: "🪨" },
+  { id: "paper", label: "Paper", emoji: "📄" },
+  { id: "scissors", label: "Scissors", emoji: "✂️" },
+];
+
+const getResult = (player, computer) => {
+  if (player === computer) return "draw";
+  if (
+    (player === "rock" && computer === "scissors") ||
+    (player === "paper" && computer === "rock") ||
+    (player === "scissors" && computer === "paper")
+  ) return "win";
+  return "lose";
+};
+
+const ANIMATION_DURATION_MS = 1800;
+const CYCLE_INTERVAL_MS = 180;
+
+const RockPaperScissorsGame = () => {
+  const [phase, setPhase] = useState("idle"); // idle | computerChoosing | playerChoosing | result
+  const [computerChoice, setComputerChoice] = useState(null);
+  const [playerChoice, setPlayerChoice] = useState(null);
+  const [result, setResult] = useState(null);
+  const [score, setScore] = useState({ wins: 0, losses: 0, draws: 0 });
+  const [cyclingIndex, setCyclingIndex] = useState(0);
+
+  // Computer choosing animation: cycle emojis, then pick and reveal
+  useEffect(() => {
+    if (phase !== "computerChoosing") return;
+    const cycle = setInterval(() => {
+      setCyclingIndex((i) => (i + 1) % CHOICES.length);
+    }, CYCLE_INTERVAL_MS);
+    const done = setTimeout(() => {
+      clearInterval(cycle);
+      setComputerChoice(CHOICES[Math.floor(Math.random() * CHOICES.length)].id);
+      setPhase("playerChoosing");
+    }, ANIMATION_DURATION_MS);
+    return () => {
+      clearInterval(cycle);
+      clearTimeout(done);
+    };
+  }, [phase]);
+
+  const startRound = useCallback(() => {
+    setPhase("computerChoosing");
+    setComputerChoice(null);
+    setPlayerChoice(null);
+    setResult(null);
+    setCyclingIndex(0);
+  }, []);
+
+  const playRound = useCallback((choice) => {
+    if (phase !== "playerChoosing" || computerChoice === null) return;
+    const res = getResult(choice, computerChoice);
+    setPlayerChoice(choice);
+    setResult(res);
+    setPhase("result");
+    setScore((prev) => ({
+      wins: prev.wins + (res === "win" ? 1 : 0),
+      losses: prev.losses + (res === "lose" ? 1 : 0),
+      draws: prev.draws + (res === "draw" ? 1 : 0),
+    }));
+  }, [phase, computerChoice]);
+
+  const resetGame = useCallback(() => {
+    setPhase("idle");
+    setPlayerChoice(null);
+    setComputerChoice(null);
+    setResult(null);
+    setScore({ wins: 0, losses: 0, draws: 0 });
+  }, []);
+
+  const choiceEmoji = (id) => CHOICES.find((c) => c.id === id)?.emoji ?? id;
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <div className="bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-900/80 rounded-3xl p-8 border border-gray-700/50">
+        <h2 className="text-3xl font-bold text-white mb-6 text-center">
+          ✊ Rock Paper Scissors
+        </h2>
+
+        <div className="text-center space-y-6">
+          <div className="flex justify-center gap-4 text-primary-400 font-semibold">
+            <span>Wins: {score.wins}</span>
+            <span>Losses: {score.losses}</span>
+            <span>Draws: {score.draws}</span>
+          </div>
+
+          {phase === "idle" && (
+            <>
+              <p className="text-gray-400">Ready? Computer will choose first, then you.</p>
+              <button
+                onClick={startRound}
+                className="px-8 py-4 bg-primary-500 hover:bg-primary-600 text-white rounded-xl text-lg font-bold transition-all transform hover:scale-105 active:scale-95 shadow-lg"
+              >
+                Play round
+              </button>
+            </>
+          )}
+
+          {phase === "computerChoosing" && (
+            <div className="py-8">
+              <p className="text-gray-400 mb-4">Computer is choosing...</p>
+              <div
+                className="inline-flex items-center justify-center w-28 h-28 rounded-2xl bg-gray-800/80 border-2 border-primary-500/50 animate-pulse"
+                style={{ animationDuration: "0.8s" }}
+              >
+                <span className="text-6xl transition-transform duration-150 scale-110">
+                  {CHOICES[cyclingIndex].emoji}
+                </span>
+              </div>
+            </div>
+          )}
+
+          {phase === "playerChoosing" && (
+            <>
+              <div className="grid grid-cols-2 gap-6 max-w-md mx-auto">
+                <div className="bg-gray-800/60 rounded-xl p-4 border border-gray-600/50">
+                  <p className="text-gray-400 text-sm mb-1">Computer chose</p>
+                  <p className="text-5xl text-gray-500">?</p>
+                  <p className="text-gray-500 font-semibold">Revealed after you choose</p>
+                </div>
+                <div className="bg-gray-800/60 rounded-xl p-4 border border-gray-600/50 flex flex-col justify-center">
+                  <p className="text-gray-400 text-sm mb-1">Your turn</p>
+                  <p className="text-xl text-primary-400 font-semibold">Choose below ↓</p>
+                </div>
+              </div>
+              <p className="text-gray-400">Your move:</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                {CHOICES.map(({ id, label, emoji }) => (
+                  <button
+                    key={id}
+                    onClick={() => playRound(id)}
+                    className="px-8 py-4 bg-primary-500/80 hover:bg-primary-500 text-white rounded-xl text-lg font-semibold flex flex-col items-center gap-2 transition-all transform hover:scale-105 active:scale-95 shadow-lg min-w-[120px]"
+                    aria-label={`Choose ${label}`}
+                  >
+                    <span className="text-4xl">{emoji}</span>
+                    <span>{label}</span>
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
+
+          {phase === "result" && (
+            <>
+              <div className="grid grid-cols-2 gap-6 max-w-md mx-auto">
+                <div className="bg-gray-800/60 rounded-xl p-4 border border-gray-600/50">
+                  <p className="text-gray-400 text-sm mb-1">Computer chose</p>
+                  <p className="text-5xl">{choiceEmoji(computerChoice)}</p>
+                  <p className="text-white font-semibold capitalize">{computerChoice}</p>
+                </div>
+                <div className="bg-gray-800/60 rounded-xl p-4 border border-gray-600/50">
+                  <p className="text-gray-400 text-sm mb-1">You chose</p>
+                  <p className="text-5xl">{choiceEmoji(playerChoice)}</p>
+                  <p className="text-white font-semibold capitalize">{playerChoice}</p>
+                </div>
+              </div>
+              <p className="text-2xl font-bold">
+                {result === "win" && <span className="text-green-400">🎉 You win!</span>}
+                {result === "lose" && <span className="text-red-400">😢 You lose!</span>}
+                {result === "draw" && <span className="text-yellow-400">🤝 Draw!</span>}
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <button
+                  onClick={startRound}
+                  className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white rounded-lg font-semibold transition-all"
+                >
+                  Play again
+                </button>
+                <button
+                  onClick={resetGame}
+                  className="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-bold flex items-center gap-2 justify-center transition-all"
+                >
+                  <FaRedo /> Reset score
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

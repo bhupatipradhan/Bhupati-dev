@@ -10,6 +10,8 @@ import Experience from "./components/v0.2/Experience";
 import Games from "./components/v0.2/Games";
 import Contact from "./components/v0.2/Contact";
 import Footer from "./components/v0.2/Footer";
+import ForEveryone from "./components/v0.2/ForEveryone";
+import FloatingNav from "./components/v0.2/FloatingNav";
 
 function App() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,9 +33,11 @@ function App() {
       <Skills />
       <Experience />
       <Projects />
+      <ForEveryone />
       <Games />
       <Contact />
       <Footer />
+      <FloatingNav />
     </div>
   );
 }

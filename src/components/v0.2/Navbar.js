@@ -7,6 +7,7 @@ const navLinks = [
   { name: "Skills", href: "#skills", id: "skills" },
   { name: "Experience", href: "#experience", id: "experience" },
   { name: "Projects", href: "#projects", id: "projects" },
+  { name: "Solutions", href: "#solutions", id: "solutions" },
   { name: "Games", href: "#games", id: "games" },
   { name: "Contact", href: "#contact", id: "contact" },
 ];
@@ -127,7 +128,7 @@ const Navbar = ({ isScrolled }) => {
       {/* Mobile Navigation */}
       <div
         className={`md:hidden bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-800/50 transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+          isMenuOpen ? "max-h-[28rem] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
