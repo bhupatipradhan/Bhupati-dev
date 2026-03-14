@@ -37,7 +37,7 @@ const Hero = () => {
               Get In Touch
             </a>
             <a
-              href="/BhupatiPradhanResume.docx"
+              href={`${process.env.PUBLIC_URL}/BhupatiPradhanResume.docx`}
               download
               className="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary-600 transition-all transform hover:scale-105"
             >

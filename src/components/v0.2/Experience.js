@@ -36,17 +36,22 @@ const Experience = () => {
     <section
       id="experience"
       ref={sectionRef}
-      className="section-container bg-gray-950 relative overflow-hidden"
+      className="section-container relative overflow-hidden"
+      style={{
+        background: "linear-gradient(160deg, #060b14 0%, #080d1a 60%, #060b14 100%)",
+      }}
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/3 right-0 w-[600px] h-[600px] bg-primary-600/6 rounded-full filter blur-[140px]" />
+        <div className="absolute bottom-1/3 left-0 w-[500px] h-[500px] bg-purple-600/6 rounded-full filter blur-[120px]" />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-[0.022]"
           style={{
             backgroundImage: `linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px)`,
             backgroundSize: "50px 50px",
           }}
-        ></div>
+        />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -56,15 +61,14 @@ const Experience = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-400 text-sm font-medium">
-              Career Journey
-            </span>
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-sm font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+            Career Journey
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
             Professional Experience
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Building enterprise solutions and leading development teams
           </p>
         </div>

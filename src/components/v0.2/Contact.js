@@ -118,17 +118,20 @@ const Contact = () => {
     <section
       id="contact"
       ref={sectionRef}
-      className="section-container bg-gray-950 relative overflow-hidden"
+      className="section-container relative overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #060b14 0%, #080e1c 55%, #060b14 100%)" }}
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-primary-600/7 rounded-full filter blur-[130px]" />
+        <div className="absolute bottom-0 left-1/4 w-[400px] h-[400px] bg-pink-600/6 rounded-full filter blur-[110px]" />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)`,
             backgroundSize: "40px 40px",
           }}
-        ></div>
+        />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -138,16 +141,14 @@ const Contact = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-400 text-sm font-medium flex items-center gap-2">
-              <HiSparkles className="animate-pulse" />
-              Let's Connect
-            </span>
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/30 text-pink-400 text-sm font-medium">
+            <HiSparkles className="animate-spin" style={{ animation: 'spin 4s linear infinite'}} />
+            Let's Connect
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
             Get In Touch
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             I'm always open to discussing new projects, creative ideas, or
             opportunities to be part of your visions.
           </p>

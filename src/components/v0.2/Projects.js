@@ -206,12 +206,13 @@ const Projects = () => {
     <section
       id="projects"
       ref={sectionRef}
-      className="section-container bg-gradient-to-br from-gray-900 via-gray-950 to-gray-900 relative overflow-hidden"
+      className="section-container relative overflow-hidden"
+      style={{ background: "linear-gradient(150deg, #070c17 0%, #0a1020 55%, #070c17 100%)" }}
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary-500 rounded-full filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl animate-pulse animation-delay-2000"></div>
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary-600/7 rounded-full filter blur-[120px]" />
+        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-purple-600/7 rounded-full filter blur-[120px] animation-delay-2000" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -221,15 +222,14 @@ const Projects = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-400 text-sm font-medium">
-              Portfolio
-            </span>
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-400 text-sm font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse" />
+            Portfolio
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
             Featured Projects
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Showcasing my work in building robust and scalable Java applications
           </p>
         </div>

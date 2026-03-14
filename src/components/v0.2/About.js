@@ -76,17 +76,22 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className="section-container bg-gray-950 relative overflow-hidden"
+      className="section-container relative overflow-hidden"
+      style={{
+        background: "linear-gradient(135deg, #060b14 0%, #0a0f1e 50%, #060b14 100%)",
+      }}
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* Animated mesh background */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary-600/8 rounded-full filter blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-purple-600/8 rounded-full filter blur-[100px]" />
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 opacity-[0.025]"
           style={{
-            backgroundImage: `radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0)`,
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)`,
             backgroundSize: "40px 40px",
           }}
-        ></div>
+        />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -96,15 +101,14 @@ const About = () => {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="inline-block mb-4">
-            <span className="px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-400 text-sm font-medium">
-              About Me
-            </span>
+          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/30 text-primary-400 text-sm font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary-400 animate-pulse" />
+            About Me
           </div>
-          <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-6xl font-extrabold mb-6 bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
             Crafting Digital Excellence
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
             Passionate Senior Java Developer building enterprise-level
             applications with cutting-edge technologies and innovative solutions
           </p>
@@ -129,7 +133,7 @@ const About = () => {
 
                 <div className="relative z-10 w-full aspect-square rounded-2xl overflow-hidden border-2 border-primary-400/30 shadow-2xl">
                   <img
-                    src="/my-photo.jpg"
+                    src={`${process.env.PUBLIC_URL}/my-photo.jpg`}
                     alt="Bhupati Pradhan"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
