@@ -179,7 +179,7 @@ const Hero = () => {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/30 backdrop-blur-sm animate-pulse-glow">
               <HiSparkles className="text-primary-400 animate-spin-slow" />
               <span className="text-sm font-medium text-primary-300">
-                Available for opportunities
+                Senior Java Developer, AI/ML Engineer & Consultant
               </span>
             </div>
 
