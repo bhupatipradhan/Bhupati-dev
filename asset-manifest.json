@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Bhupati-dev/static/css/main.17f165c4.css",
-    "main.js": "/Bhupati-dev/static/js/main.be39f76d.js",
+    "main.js": "/Bhupati-dev/static/js/main.1e49b41d.js",
     "index.html": "/Bhupati-dev/index.html",
     "main.17f165c4.css.map": "/Bhupati-dev/static/css/main.17f165c4.css.map",
-    "main.be39f76d.js.map": "/Bhupati-dev/static/js/main.be39f76d.js.map"
+    "main.1e49b41d.js.map": "/Bhupati-dev/static/js/main.1e49b41d.js.map"
   },
   "entrypoints": [
     "static/css/main.17f165c4.css",
-    "static/js/main.be39f76d.js"
+    "static/js/main.1e49b41d.js"
   ]
 }
