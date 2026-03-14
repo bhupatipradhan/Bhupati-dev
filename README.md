@@ -2,7 +2,7 @@
 
 A modern, responsive portfolio website built with React and Tailwind CSS for showcasing Java development skills, projects, and experience.
 
-## Features
+## Features  
 
 - 🎨 Modern and responsive design
 - 📱 Mobile-friendly interface
