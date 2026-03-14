@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Bhupati-dev/static/css/main.17f165c4.css",
+    "main.js": "/Bhupati-dev/static/js/main.48b33d8e.js",
+    "index.html": "/Bhupati-dev/index.html",
+    "main.17f165c4.css.map": "/Bhupati-dev/static/css/main.17f165c4.css.map",
+    "main.48b33d8e.js.map": "/Bhupati-dev/static/js/main.48b33d8e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.17f165c4.css",
+    "static/js/main.48b33d8e.js"
+  ]
+}
